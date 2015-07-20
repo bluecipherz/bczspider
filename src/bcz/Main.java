@@ -18,29 +18,32 @@ public class Main {
         print("Fetching %s...", url);
 
         Document doc = Jsoup.connect(url).get();
-        Elements links = doc.select("a[href]");
+        Elements links = doc.select("li");
+        Elements CatHead = doc.select("a[rel=]");
+        Elements CatCont = doc.select("div[class]");
         Elements media = doc.select("[src]");
         Elements imports = doc.select("link[href]");
 
-        print("\nMedia: (%d)", media.size());
-        for (Element src : media) {
-            if (src.tagName().equals("img"))
-                print(" * %s: <%s> %sx%s (%s)",
-                        src.tagName(), src.attr("abs:src"), src.attr("width"), src.attr("height"),
-                        trim(src.attr("alt"), 20));
-            else
-                print(" * %s: <%s>", src.tagName(), src.attr("abs:src"));
-        }
+//        print("\nMedia: (%d)", media.size());
+//        for (Element src : media) {
+//            if (src.tagName().equals("img"))
+//                print(" * %s: <%s> %sx%s (%s)",
+//                        src.tagName(), src.attr("abs:src"), src.attr("width"), src.attr("height"),
+//                        trim(src.attr("alt"), 20));
+//            else
+//                print(" * %s: <%s>", src.tagName(), src.attr("abs:src"));
+//        }
 
-        print("\nImports: (%d)", imports.size());
-        for (Element link : imports) {
-            print(" * %s <%s> (%s)", link.tagName(),link.attr("abs:href"), link.attr("rel"));
-        }
-
-        print("\nLinks: (%d)", links.size());
-        for (Element link : links) {
-            print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
-        }
+//        print("\nLinks: (%d)", links.size());
+//        for (Element link : links) {
+//        	//  print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
+//        	System.out.println(link.text());
+//        }
+     print("\nCategory: (%d)", CatHead.size());
+     for (Element CatHeads : CatHead) {
+    	 System.out.println(CatHeads.text());
+     }
+        
     }
 
     private static void print(String msg, Object... args) {
